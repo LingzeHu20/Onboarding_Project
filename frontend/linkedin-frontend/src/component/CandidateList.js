@@ -1,21 +1,44 @@
-import React from "react";
-import { ListGroup, ListGroupItem } from "reactstrap";
+import React, { useEffect, useState } from "react";
+import {
+  ListGroup,
+  ListGroupItem,
+  ListGroupItemHeading,
+  ListGroupItemText,
+  Badge
+} from "reactstrap";
 import * as userAPI from "../api/users";
 
-const getCandidates = async (name, title, tag) => {
-  return await userAPI.getUsersByFilter({ name: name });
-};
+const CandidateList = (props) => {
+  const { name } = props;
+  const [candidates, setCandidates] = useState();
 
-const CandidateList = (name, title, tag) => {
-  const candidates = getCandidates(name, title, tag);
+  const getCandidates = async (name) => {
+    const result = await userAPI.getUsersByFilter({ name: name });
+    setCandidates(result.result);
+
+    return result;
+  };
+
+  useEffect(() => {
+    const result = getCandidates(name);
+    console.log(result);
+    setCandidates(result.result);
+  }, [name]);
 
   return (
     <div>
       <ListGroup>
-        <ListGroupItem>Cras justo odio</ListGroupItem>
-        <ListGroupItem>Cras justo odio</ListGroupItem>
-        <ListGroupItem>Cras justo odio</ListGroupItem>
-        <ListGroupItem>Cras justo odio</ListGroupItem>
+        {candidates &&
+          candidates.map((candidate) => {
+            return (
+              <ListGroupItem key={candidate.id}>
+                <ListGroupItemHeading>
+            {candidate.user_name}{" "} <Badge color="primary">{candidate.tag}</Badge>
+                </ListGroupItemHeading>
+                <ListGroupItemText>Title: {candidate.title}</ListGroupItemText>
+              </ListGroupItem>
+            );
+          })}
       </ListGroup>
     </div>
   );

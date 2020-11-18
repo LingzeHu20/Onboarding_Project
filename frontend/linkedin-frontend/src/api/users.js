@@ -7,6 +7,5 @@ export async function  getUsersByFilter(params)  {
       "Content-Type": "application/x-www-form-urlencoded",
     },
   });
-  console.log(result);
   return result;
 }

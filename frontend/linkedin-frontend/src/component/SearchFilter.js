@@ -17,7 +17,6 @@ const SearchFilter = () => {
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
   const handleSearch = () => {
-    console.log("Handle Search");
     if (title !== undefined)
         setTitleValue(title);
     if (tag !== undefined)
