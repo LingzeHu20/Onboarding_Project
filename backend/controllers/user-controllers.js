@@ -8,9 +8,9 @@ const sequelize = new Sequelize('db_onboarding', 'root', '12345678', {
 
 const getUserByFilter = async (req, res, next) => {
     //   let users;
-    const { title, tag } = req.query;
-    console.log(title);
-    console.log(tag);
+    const { name, title, tag } = req.query;
+
+    console.log(name, title, tag);
 
     try {
         await sequelize.authenticate();
@@ -25,24 +25,17 @@ const getUserByFilter = async (req, res, next) => {
         tag: DataTypes.TEXT,
     });
 
-    // (async () => {
-    //     await sequelize.sync({ force: true });
-    //     // Code here
-    //   })();
-
     const jane = await User.create({ 
-        user_name: "Jane", 
-        title: "Software", 
-        tag: "React", 
+        user_name: "Lily", 
+        title: "Quality Assurance", 
+        tag: "ExpressJS", 
         // createdAt: sequelize.literal('CURRENT_TIMESTAMP'), 
         // updatedAt: sequelize.literal('CURRENT_TIMESTAMP'), 
     });
-    console.log(jane instanceof User); // true
-    console.log(jane.id); // "Jane"
 
     const users = await User.findAll();
     console.log(users.every(user => user instanceof User)); // true
-    console.log("All users:", JSON.stringify(users, null, 2));
+    //console.log("All users:", JSON.stringify(users, null, 2));
 
 
     try {

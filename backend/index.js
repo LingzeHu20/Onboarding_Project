@@ -12,4 +12,4 @@ app.use(bodyParser.json())
 
 app.use('/user', userRoutes);
 
-app.listen(3000);
+app.listen(8080);
