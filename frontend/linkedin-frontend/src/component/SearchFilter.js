@@ -51,7 +51,7 @@ const SearchFilter = (props) => {
             />
           </FormGroup>
           <FormGroup>
-            <Label for="tag">Tag/Skill</Label>
+            <Label for="tag">Tag/Industry</Label>
             <Input
               type="search"
               name="tag"
