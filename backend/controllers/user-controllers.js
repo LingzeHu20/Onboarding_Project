@@ -7,7 +7,7 @@ const sequelize = new Sequelize("db_onboarding", "root", "12345678", {
 });
 
 const getUserByFilter = async (req, res, next) => {
-  const { name, title, tag, currPage } = req.query;
+  const { name, title, tag, currPage = 1 } = req.query;
   console.log(req.query);
 
   try {
@@ -43,8 +43,10 @@ const getUserByFilter = async (req, res, next) => {
 const users = await sequelize.query(candidatesSQL, { type: QueryTypes.SELECT });
 
   res.json({
-    total: total_count[0],
-    result: users,
+    totalPages: total_count[0]["COUNT(*)"],
+    currPage: parseInt(currPage),
+    pageLimit: 10,
+    candidates: users,
   });
   next();
 };

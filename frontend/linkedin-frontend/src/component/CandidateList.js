@@ -7,16 +7,19 @@ import {
   Badge,
 } from "reactstrap";
 import * as userAPI from "../api/users";
+import PaginationComponent from "./PaginationComponent";
 
 const CandidateList = (props) => {
   const { name, title, tag } = props;
   const [candidates, setCandidates] = useState([]);
+  const [pageNum, setPageNum] = useState(1);
 
   const getCandidates = async () => {
     const result = await userAPI.getUsersByFilter({
       name: name,
       title: title,
       tag: tag,
+      currPage: pageNum,
     });
     return result;
   };
@@ -26,7 +29,7 @@ const CandidateList = (props) => {
       console.log(result);
       setCandidates(result.result);
     });
-  }, [name, title, tag]);
+  }, [name, title, tag, pageNum]);
 
   const getKeyWords = () => {
     let keyWord = "";
@@ -42,6 +45,7 @@ const CandidateList = (props) => {
 
   return (
     <div>
+      <PaginationComponent />
       {haveSearchKeyword() ? (
         <div>
           According to the Keyword: {getKeyWords()}, we have the{" "}
