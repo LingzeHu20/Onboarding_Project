@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   Card,
   Button,
@@ -9,20 +9,16 @@ import {
   Label,
   Input,
 } from "reactstrap";
-import { MyContext } from "../utils/context-manager";
 
-const SearchFilter = () => {
-  const { setTitleValue, setTagValue, setNameValue } = useContext(MyContext);
+const SearchFilter = (props) => {
+  const { handleTitleValue, handleTagValue, handleNameValue } = props;
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
   const handleSearch = () => {
-    if (title !== undefined)
-        setTitleValue(title);
-    if (tag !== undefined)
-        setTagValue(tag);
-    if (name !== undefined)
-        setNameValue(name);
+    if (title !== undefined) handleTitleValue(title);
+    if (tag !== undefined) handleTagValue(tag);
+    if (name !== undefined) handleNameValue(name);
   };
   return (
     <div>
