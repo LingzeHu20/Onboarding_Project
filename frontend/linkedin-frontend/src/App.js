@@ -27,7 +27,7 @@ const App = () => {
             </MyContext.Provider>
           </Col>
           <Col xs="8" sm="8">
-           { name && <CandidateList title={title} tag={tag} name={name} />}
+           <CandidateList title={title} tag={tag} name={name} />
           </Col>
         </Row>
       </Container>

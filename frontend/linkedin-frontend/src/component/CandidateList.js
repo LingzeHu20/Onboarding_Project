@@ -15,7 +15,6 @@ const CandidateList = (props) => {
   const getCandidates = async (name) => {
     const result = await userAPI.getUsersByFilter({ name: name });
     setCandidates(result.result);
-
     return result;
   };
 
