@@ -29,7 +29,7 @@ const getUserByFilter = async (req, res, next) => {
   });
 
   //===================For Pagination============================
-  //Each page has 5 candidates at most;
+  //Each page has 'limit' candidates at most;
   const limit = 5;
 
   const countSQL = `SELECT COUNT(*) FROM users 

@@ -11,11 +11,12 @@ import {
 } from "reactstrap";
 
 const SearchFilter = (props) => {
-  const { handleTitleValue, handleTagValue, handleNameValue } = props;
+  const { handleTitleValue, handleTagValue, handleNameValue, handlePageNum } = props;
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
   const handleSearch = () => {
+    handlePageNum(1);
     if (title !== undefined) handleTitleValue(title);
     if (tag !== undefined) handleTagValue(tag);
     if (name !== undefined) handleNameValue(name);

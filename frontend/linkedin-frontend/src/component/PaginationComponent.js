@@ -50,7 +50,7 @@ const PaginationComponent = (props) => {
   }
 
   return (
-    <div style={{margin:"0 auto", textAlign:"center"}}>
+    <div style={{ margin: "0 auto", textAlign: "center" }}>
       <Pagination aria-label="Page navigation">
         <PaginationItem>
           <PaginationLink first onClick={() => handlePageChange(1)} />
@@ -66,7 +66,7 @@ const PaginationComponent = (props) => {
 
         {currPage - 2 > 0 && (
           <PaginationItem>
-            <PaginationLink onClick={() => handlePageChange(totalPages - 2)}>
+            <PaginationLink onClick={() => handlePageChange(currPage - 2)}>
               {" "}
               ...{" "}
             </PaginationLink>
@@ -75,19 +75,21 @@ const PaginationComponent = (props) => {
 
         {currPage - 1 > 0 && (
           <PaginationItem>
-            <PaginationLink onClick={() => handlePageChange(totalPages - 1)}>
+            <PaginationLink onClick={() => handlePageChange(currPage - 1)}>
               {" "}
               {currPage - 1}{" "}
             </PaginationLink>
           </PaginationItem>
         )}
         <PaginationItem>
-        <PaginationLink active ><div style={{fontWeight:"bold", }}>{currPage}</div></PaginationLink>
+          <PaginationLink>
+            <div style={{ fontWeight: "bold" }}>{currPage}</div>
+          </PaginationLink>
         </PaginationItem>
 
         {currPage < totalPages && (
           <PaginationItem>
-            <PaginationLink onClick={() => handlePageChange(totalPages + 1)}>
+            <PaginationLink onClick={() => handlePageChange(currPage + 1)}>
               {" "}
               {currPage + 1}{" "}
             </PaginationLink>
@@ -96,14 +98,19 @@ const PaginationComponent = (props) => {
 
         {currPage + 2 < totalPages && (
           <PaginationItem>
-            <PaginationLink onClick={() => handlePageChange(totalPages + 2)}>
+            <PaginationLink onClick={() => handlePageChange(currPage + 2)}>
               {" "}
               ...{" "}
             </PaginationLink>
           </PaginationItem>
         )}
         <PaginationItem>
-          <PaginationLink next onClick={() => {if (currPage + 1 < totalPages) handlePageChange(currPage + 1)}} />
+          <PaginationLink
+            next
+            onClick={() => {
+              if (currPage + 1 < totalPages) handlePageChange(currPage + 1);
+            }}
+          />
         </PaginationItem>
         <PaginationItem>
           <PaginationLink last onClick={() => handlePageChange(totalPages)} />

@@ -10,9 +10,9 @@ import * as userAPI from "../api/users";
 import PaginationComponent from "./PaginationComponent";
 
 const CandidateList = (props) => {
-  const { name, title, tag } = props;
+  const { name, title, tag, pageNum, handlePageNum } = props;
   const [candidates, setCandidates] = useState([]);
-  const [pageNum, setPageNum] = useState(1);
+  //const [pageNum, setPageNum] = useState(1);
   const [totalPages, setTotalPages] = useState();
   const [totalCount, setTotalCount] = useState();
 
@@ -50,14 +50,7 @@ const CandidateList = (props) => {
 
   return (
     <div>
-      {totalPages && (
-        <PaginationComponent
-          handlePageChange={setPageNum}
-          currPage={pageNum}
-          totalPages={totalPages}
-          totalCount={totalCount}
-        />
-      )}
+      
       {haveSearchKeyword() ? (
         <div>
           According to the Keyword: {getKeyWords()}, we have the {totalCount}{" "}
@@ -103,6 +96,15 @@ const CandidateList = (props) => {
           );
         })}
       </ListGroup>
+
+      {totalPages && (
+        <PaginationComponent
+          handlePageChange={handlePageNum}
+          currPage={pageNum}
+          totalPages={totalPages}
+          totalCount={totalCount}
+        />
+      )}
     </div>
   );
 };

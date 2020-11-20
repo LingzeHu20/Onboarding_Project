@@ -8,7 +8,7 @@ const App = () => {
   const [title, setTitleValue] = useState();
   const [tag, setTagValue] = useState();
   const [name, setNameValue] = useState();
-
+  const [pageNum, setPageNum] = useState();
   return (
     <div>
       <br />
@@ -20,10 +20,17 @@ const App = () => {
               handleTitleValue={setTitleValue}
               handleTagValue={setTagValue}
               handleNameValue={setNameValue}
+              handlePageNum={setPageNum}
             />
           </Col>
           <Col xs="8" sm="8">
-            <CandidateList title={title} tag={tag} name={name} />
+            <CandidateList
+              title={title}
+              tag={tag}
+              name={name}
+              pageNum={pageNum}
+              handlePageNum={setPageNum}
+            />
           </Col>
         </Row>
       </Container>
