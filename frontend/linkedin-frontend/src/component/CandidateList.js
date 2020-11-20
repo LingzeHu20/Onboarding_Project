@@ -45,7 +45,7 @@ const CandidateList = (props) => {
   };
 
   const haveSearchKeyword = () => {
-    return name !== "" || title !== "" || tag !== "";
+    return name !== undefined || title !== undefined || tag !== undefined
   };
 
   return (
@@ -57,7 +57,8 @@ const CandidateList = (props) => {
           results.
         </div>
       ) : (
-        <div>We have the {totalCount} results.</div>
+        // <div>We have the {totalCount} results.</div>
+        <></>
       )}
       <br></br>
       <ListGroup>
@@ -97,7 +98,7 @@ const CandidateList = (props) => {
         })}
       </ListGroup>
 
-      {totalPages && (
+      {totalPages !== 0 && (
         <PaginationComponent
           handlePageChange={handlePageNum}
           currPage={pageNum}

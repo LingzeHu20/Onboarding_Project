@@ -6,7 +6,7 @@ const PaginationComponent = (props) => {
 
   if (totalPages <= 5) {
     return (
-      <div>
+      <div style={{ marginTop: "5px", textAlign: "center" }}>
         <Pagination aria-label="Page navigation">
           <PaginationItem>
             <PaginationLink onClick={() => handlePageChange(1)}>
@@ -50,7 +50,7 @@ const PaginationComponent = (props) => {
   }
 
   return (
-    <div style={{ margin: "0 auto", textAlign: "center" }}>
+    <div style={{ marginTop: "5px", textAlign: "center" }}>
       <Pagination aria-label="Page navigation">
         <PaginationItem>
           <PaginationLink first onClick={() => handlePageChange(1)} />
