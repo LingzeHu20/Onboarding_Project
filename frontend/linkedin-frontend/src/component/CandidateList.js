@@ -13,6 +13,8 @@ const CandidateList = (props) => {
   const { name, title, tag } = props;
   const [candidates, setCandidates] = useState([]);
   const [pageNum, setPageNum] = useState(1);
+  const [totalPages, setTotalPages] = useState();
+  const [totalCount, setTotalCount] = useState();
 
   const getCandidates = async () => {
     const result = await userAPI.getUsersByFilter({
@@ -27,7 +29,10 @@ const CandidateList = (props) => {
   useEffect(() => {
     getCandidates().then((result) => {
       console.log(result);
-      setCandidates(result.result);
+      const { candidates, totalCount, totalPages } = result;
+      if (candidates !== undefined) setCandidates(candidates);
+      setTotalCount(totalCount);
+      setTotalPages(totalPages);
     });
   }, [name, title, tag, pageNum]);
 
@@ -45,14 +50,21 @@ const CandidateList = (props) => {
 
   return (
     <div>
-      <PaginationComponent />
+      {totalPages && (
+        <PaginationComponent
+          handlePageChange={setPageNum}
+          currPage={pageNum}
+          totalPages={totalPages}
+          totalCount={totalCount}
+        />
+      )}
       {haveSearchKeyword() ? (
         <div>
-          According to the Keyword: {getKeyWords()}, we have the{" "}
-          {candidates.length} results.
+          According to the Keyword: {getKeyWords()}, we have the {totalCount}{" "}
+          results.
         </div>
       ) : (
-        <div>We have the {candidates.length} results.</div>
+        <div>We have the {totalCount} results.</div>
       )}
       <br></br>
       <ListGroup>

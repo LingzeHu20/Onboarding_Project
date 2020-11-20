@@ -29,23 +29,26 @@ const getUserByFilter = async (req, res, next) => {
   });
 
   //===================For Pagination============================
-  //Each page has 10 candidates at most;
+  //Each page has 5 candidates at most;
+  const limit = 5;
 
   const countSQL = `SELECT COUNT(*) FROM users 
             WHERE user_name LIKE '%${name}%' AND title LIKE '%${title}%' AND tag LIKE '%${tag}%' `;
-  const total_count = await sequelize.query(countSQL, { type: QueryTypes.SELECT });
-  const totalPages = Math.ceil(countSQL / 10);
+  let total_count = await sequelize.query(countSQL, { type: QueryTypes.SELECT });
+  total_count = total_count[0]["COUNT(*)"];
+  const totalPages = Math.ceil(total_count / limit );
 
 
   const candidatesSQL = `SELECT * FROM users 
   WHERE user_name LIKE '%${name}%' AND title LIKE '%${title}%' AND tag LIKE '%${tag}%'
-  limit 10 offset ${10 * (currPage -1 )} `;
+  limit ${limit} offset ${ limit * (currPage -1 )} `;
 const users = await sequelize.query(candidatesSQL, { type: QueryTypes.SELECT });
 
   res.json({
-    totalPages: total_count[0]["COUNT(*)"],
+    totalPages: totalPages,
+    totalCount: total_count,
     currPage: parseInt(currPage),
-    pageLimit: 10,
+    pageLimit: limit,
     candidates: users,
   });
   next();
